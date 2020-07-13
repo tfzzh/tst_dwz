@@ -8,7 +8,7 @@ import './dwz.css';
 
 const { reqPost } = require('./../../req/dwz');
 
-class DwzLong extends Component {
+class DwzList extends Component {
 
 	state = {
 		list: [],
@@ -17,7 +17,6 @@ class DwzLong extends Component {
 			p: 1,
 			s: 5,
 		},
-		// inPage: 0, // 防止重复请求
 	};
 	// table所需表头及数据属性相关信息
 	columns = [
@@ -74,14 +73,6 @@ class DwzLong extends Component {
 	 * @param {int} p 目标页面
 	 */
 	pageData = (p) => {
-		// let now = new Date().getTime();
-		// console.log("pageData >> [" + now + "][" + this.state.inPage + "] -- [" + (now - this.state.inPage) + "]");
-		// if (this.state.inPage && (now - this.state.inPage < 6000)) {
-		// 	return;
-		// }
-		// this.setState({
-		// 	inPage: now
-		// });
 		const params = {
 			p: p,
 			s: this.state.page.pageSize,
@@ -94,7 +85,6 @@ class DwzLong extends Component {
 			that.setState({
 				list: res.data.list,
 				page: tp,
-				// inPage: 0,
 			});
 		});
 	};
@@ -126,4 +116,4 @@ class DwzLong extends Component {
 	}
 }
 
-export default DwzLong;
+export default DwzList;

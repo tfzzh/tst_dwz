@@ -75,11 +75,6 @@ export function get(url, params) {
 			}
 		}).catch(err => {
 			saveReqLog(url, params, (err.message ? err.message : err), t1);
-			if (err.msg) {
-				// alert("出错了 > post request ", err);
-			} else {
-				// alert("出错了 > post request ", err);
-			}
 		})
 	})
 }
