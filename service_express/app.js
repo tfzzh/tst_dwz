@@ -8,7 +8,10 @@ let configRouter = require('./routes/config'); // add xwj 2020-07-11
 const { assert } = require('console');
 // 数据库预初始化 xwj 2020-07-14
 const mysql_conn = require('./model/mysql_conn');
-mysql_conn.initSql();
+setTimeout(()=>{
+	// 分离线程进行验证数据库创建作业
+	mysql_conn.initSql();
+}, 0);
 
 var app = express();
 

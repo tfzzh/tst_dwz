@@ -12,6 +12,8 @@ let tabName = {
 	d_link: '`d_link`',
 	d_link_log: '`d_link_log`',
 }
+let inCreateDb = false;
+let createDbOver = 0;
 // 连接池，暂时无实际效用，之后考虑真正池效果
 let pool = mysql.createPool(Object.assign({}, dbParams, { database: dbName }))//数据库连接配置
 /**
@@ -21,6 +23,23 @@ let pool = mysql.createPool(Object.assign({}, dbParams, { database: dbName }))//
  * @param {function} bakFun 操作结果回调
  */
 function query(sql, sqlParams, bakFun) {
+	if (inCreateDb) {
+		// 有在进行创建库操作，须等待
+		if (!createDbOver) {
+			// 还未创建完成
+			setTimeout(()=>{
+				query(sql, sqlParams, bakFun);
+			}, 50);
+			return;
+		}
+		if (createDbOver === 1) {
+			// 创建成功，无处理
+		} else {
+			// 创建失败
+			bakFun(createDbOver);
+			return;
+		}
+	}
 	pool.getConnection(function (err, conn) {
 		if (err) {
 			if (err.errno === 1049) { // 认为是目标库不存在，所以需要创建或其他初始化相关
@@ -42,16 +61,42 @@ function query(sql, sqlParams, bakFun) {
  * @param {function} bakFun 操作结果回调
  */
 function createDb(sql, sqlParams, bakFun) {
+	if (inCreateDb) {
+		// 创建中
+		if (createDbOver) {
+			// 创建完成
+			if (createDbOver === 1) {
+				// 创建成功
+				query(sql, sqlParams, bakFun);
+			} else {
+				// 创建失败
+				bakFun(createDbOver);
+			}
+		} else {
+			// 等待创建中
+			setTimeout(()=>{
+				createDb(sql, sqlParams, bakFun);
+			}, 80);
+		}
+		return;
+	}
+	inCreateDb = true;
 	console.log('>model mysql createDb [' + dbName + '] >> [' + sql + ']');
 	let init = require('./init_db');
 	init.initDb(dbName, dbParams, (err) => {
 		console.log('>model mysql create db [' + dbName + '] bak ... ');
 		if (!err) {
 			// 因成功，从新进行请求
+			createDbOver = 1;
+			setTimeout(()=>{
+				// 延迟还原
+				inCreateDb = false;
+			}, 5000);
 			query(sql, sqlParams, bakFun);
 		} else {
 			// 失败直接返回
 			console.error('>model mysql err in create db ... ', err);
+			createDbOver = err;
 			bakFun(err);
 		}
 	});
