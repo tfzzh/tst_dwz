@@ -39,8 +39,11 @@ module.exports = {
      * @author xwj 2020-0712
      * @returns {string} 8位长随机码
      */
-    shortCode:()=>{
-        return rc.timeCode(8);
+    shortCode:(len)=>{
+        if (!len) {
+            len = 8;
+        }
+        return rc.timeCode(len);
     }
 };
 
