@@ -75,6 +75,9 @@ function toQuery(conn, sql, sqlParams, bakFun) {
 module.exports = {
 	query: query,
 	tabName: tabName,
+	initSql: ()=>{
+		query('select now();', '',()=>{});
+	}
 }
 
 

@@ -6,6 +6,9 @@ var logger = require('morgan');
 
 let configRouter = require('./routes/config'); // add xwj 2020-07-11
 const { assert } = require('console');
+// 数据库预初始化 xwj 2020-07-14
+const mysql_conn = require('./model/mysql_conn');
+mysql_conn.initSql();
 
 var app = express();
 
