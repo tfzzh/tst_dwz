@@ -123,3 +123,16 @@
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 }
+/** placeholder颜色 **/
+.d_body input::-webkit-input-placeholder{
+	color:#d9d9d9;
+}
+.d_body input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+	color:#d9d9d9;
+}
+.d_body input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+	color:#d9d9d9;
+}
+.d_body input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+	color:#d9d9d9;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Notifications, { notify } from 'react-notify-toast';
+
+import DwzLabs from './../components/dwz_labs';
 
 import './dwz.css';
 
@@ -82,15 +83,9 @@ class DwzShort extends Component {
 		return (
 			<div className="dwz_root">
 				<div className="d_body">
-					<div className="b_tit">
-						<div className="b_t_bcol">
-							<Link to="/cre" className="b_t_lab">缩短网址</Link>
-							<div className="b_t_lab b_act">还原网址</div>
-							<Link to="/list" className="b_t_lab">短链列表</Link>
-						</div>
-					</div>
+					<DwzLabs tar="info"/>
 					<div className="b_input">
-						<input type="text" className="b_i_txt" onChange={this.changeInput} onKeyUp={this.keyupInput} placeholder="请直接输入不带域名的短码进行验证"></input>
+						<input type="text" className="b_i_txt" onChange={this.changeInput} onKeyUp={this.keyupInput} placeholder="请直接输入后缀(如:xxx)"></input>
 						<button onClick={this.toLong}>还原网址</button>
 					</div>
 					<div className="b_long">

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Notifications, { notify } from 'react-notify-toast';
+
+import DwzLabs from './../components/dwz_labs';
 
 import './dwz.css';
 
@@ -63,15 +64,9 @@ class DwzLong extends Component {
 		return (
 			<div className="dwz_root">
 				<div className="d_body">
-					<div className="b_tit">
-						<div className="b_t_bcol">
-							<div className="b_t_lab b_act">缩短网址</div>
-							<Link to="/info" className="b_t_lab">还原网址</Link>
-							<Link to="/list" className="b_t_lab">短链列表</Link>
-						</div>
-					</div>
+					<DwzLabs tar="cre"/>
 					<div className="b_input">
-						<input type="text" className="b_i_txt" onChange={this.changeInput} onKeyUp={this.keyupInput}></input>
+						<input type="text" className="b_i_txt" onChange={this.changeInput} onKeyUp={this.keyupInput} placeholder="请输入长网址"></input>
 						<button onClick={this.toShort}>缩短网址</button>
 					</div>
 					<div className="b_long">

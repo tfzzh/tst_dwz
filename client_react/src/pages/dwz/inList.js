@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Table } from 'antd';
 import 'antd/dist/antd.css'
 import moment from 'moment'
+
+import DwzLabs from './../components/dwz_labs';
 
 import './dwz.css';
 
@@ -92,20 +93,13 @@ class DwzList extends Component {
 	 * 页面初始化后处理的逻辑
 	 */
 	componentDidMount() {
-		console.log('>page dwz.list in componentDidMount ... ');
 		this.pageData(1);
 	};
 	render() {
 		return (
 			<div className="dwz_root">
 				<div className="d_body d_table">
-					<div className="b_tit">
-						<div className="b_t_bcol">
-							<Link to="/cre" className="b_t_lab">缩短网址</Link>
-							<Link to="/info" className="b_t_lab">还原网址</Link>
-							<div className="b_t_lab b_act">短链列表</div>
-						</div>
-					</div>
+					<DwzLabs tar="list"/>
 					<div className="b_table">
 						<Table columns={this.columns} dataSource={this.state.list} scroll={{ y: 420 }}
 							pagination={{ page: this.state.page.p, current: this.state.page.p, pageSize: this.state.page.s, total: this.state.page.t, onChange: this.changePage, }} />
