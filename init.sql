@@ -8,7 +8,6 @@ CREATE TABLE `d_link` (
   `call_times` varchar(45) DEFAULT NULL COMMENT '被调用次数',
   `last_call_time` bigint(20) DEFAULT NULL COMMENT '最后一次被访问时间',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `d_url_UNIQUE` (`d_url`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 

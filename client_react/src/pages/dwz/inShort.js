@@ -18,7 +18,7 @@ class DwzShort extends Component {
 	 * @author xwj 2020-07-12
 	 */
 	toLong = () => {
-		console.log("in to short ... ");
+		console.log("in to short ["+this.state.sUrl+"] ... ");
 		if (!this.state.sUrl) {
 			notify.show('短网址不能为空', 'warning', 2000);
 			return;
@@ -60,6 +60,7 @@ class DwzShort extends Component {
 	 * @param {Event} e 数据变更事件
 	 */
 	changeInput = (e) => {
+		console.log("in keyupInput ["+e.keyCode+"]");
 		this.setState({
 			sUrl: e.target.value
 		})
@@ -72,13 +73,13 @@ class DwzShort extends Component {
 	keyupInput = (e) => {
 		if (e.keyCode === 13) {
 			// 回车，进行数据请求
-			this.toShort();
+			this.toLong();
 		}
 	}
 	render() {
 		let showShort = null;
 		if (this.state.tUrl) { // 如果存在目标网址才显示
-			showShort = (<div className="b_f_txt">原网址：<a href={this.state.tUrl} target="_blank" rel="noopener noreferrer">{this.state.tUrl}</a></div>);
+			showShort = (<div className="b_f_txt">原网址：<a data-testid="b_s_turl" href={this.state.tUrl} target="_blank" rel="noopener noreferrer">{this.state.tUrl}</a></div>);
 		}
 		return (
 			<div className="dwz_root">
@@ -86,7 +87,7 @@ class DwzShort extends Component {
 					<DwzLabs tar="info"/>
 					<div className="b_input">
 						<input type="text" className="b_i_txt" onChange={this.changeInput} onKeyUp={this.keyupInput} placeholder="请直接输入后缀(如:xxx)"></input>
-						<button onClick={this.toLong}>还原网址</button>
+						<button data-testid="b_s_sub" onClick={this.toLong}>还原网址</button>
 					</div>
 					<div className="b_long">
 						{showShort}

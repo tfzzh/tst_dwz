@@ -18,7 +18,7 @@ class DwzLong extends Component {
 	 * @author xwj 2020-07-12
 	 */
 	toShort = () => {
-		console.log("in to short ... ");
+		console.log("in to short ["+this.state.tUrl+"] ... ");
 		if (!this.state.tUrl) {
 			notify.show('长网址不能为空', 'warning', 2000);
 			return;
@@ -28,7 +28,6 @@ class DwzLong extends Component {
 		};
 		let that = this;
 		reqPost.create(params).then((res) => {
-			console.log("create bak .. ", res);
 			that.setState({
 				sUrl: res.data.sHost + res.data.sCode,
 			});
@@ -51,6 +50,7 @@ class DwzLong extends Component {
 	 * @param {Event} e 按键事件
 	 */
 	keyupInput = (e) => {
+		console.log("in keyupInput ["+e.keyCode+"]");
 		if (e.keyCode === 13) {
 			// 回车，进行数据请求
 			this.toShort();
@@ -59,7 +59,7 @@ class DwzLong extends Component {
 	render() {
 		let showShort = null;
 		if (this.state.sUrl) { // 如果存在目标短码才显示
-			showShort = (<div className="b_f_txt">短网址：<a href={this.state.sUrl} target="_blank" rel="noopener noreferrer">{this.state.sUrl}</a></div>);
+			showShort = (<div className="b_f_txt">短网址：<a data-testid="b_l_scode" href={this.state.sUrl} target="_blank" rel="noopener noreferrer">{this.state.sUrl}</a></div>);
 		}
 		return (
 			<div className="dwz_root">
@@ -67,7 +67,7 @@ class DwzLong extends Component {
 					<DwzLabs tar="cre"/>
 					<div className="b_input">
 						<input type="text" className="b_i_txt" onChange={this.changeInput} onKeyUp={this.keyupInput} placeholder="请输入长网址"></input>
-						<button onClick={this.toShort}>缩短网址</button>
+						<button data-testid="b_l_sub" onClick={this.toShort}>缩短网址</button>
 					</div>
 					<div className="b_long">
 						{showShort}
