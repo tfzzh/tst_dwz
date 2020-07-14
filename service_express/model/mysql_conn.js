@@ -14,6 +14,7 @@ let tabName = {
 }
 // 是否创建库进行中
 let inCreateDb = false;
+// 创建库完成状态：0，创建进行中；1，创建成功；err，问题情况；
 let createDbOver = 0;
 // 连接池，暂时无实际效用，之后考虑真正池效果
 let pool = mysql.createPool(Object.assign({}, dbParams, { database: dbName }))//数据库连接配置
