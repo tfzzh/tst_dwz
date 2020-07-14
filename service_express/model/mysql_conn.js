@@ -12,6 +12,7 @@ let tabName = {
 	d_link: '`d_link`',
 	d_link_log: '`d_link_log`',
 }
+// 是否创建库进行中
 let inCreateDb = false;
 let createDbOver = 0;
 // 连接池，暂时无实际效用，之后考虑真正池效果
