@@ -37,7 +37,7 @@ export class MysqlConnectioin {
 	 */
 	public static validateDb(bakFun: Function): void {
 		let sql: string = 'select now();';
-		this.query(sql, '', (err, rows) => {
+		this.query(sql, '', (err: mysql.MysqlError, rows: any) => {
 			if (err) {
 				if (err.errno === 1049) { // 认为是目标库不存在，所以需要创建或其他初始化相关
 					this.createDb(bakFun);

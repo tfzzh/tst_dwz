@@ -20,7 +20,7 @@ export class Constants {
 	 * 数据库名
 	 * @author xwj 2020-07-15
 	 */
-	static dbName: string = 'tst_dwz111';
+	static dbName: string = 'tst_dwz';
 	/**
 	 * 基础数据库请求参数
 	 * @author xwj 2020-07-15

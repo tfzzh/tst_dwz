@@ -45,7 +45,7 @@ class DwzView {
 			tUrl = 'http://' + tUrl;
 		}
 		let shortCode: string = RandomCode.shortCode(8);
-		DwzView.model_dwz.insert(shortCode, tUrl, (err, data) => {
+		DwzView.model_dwz.insert(shortCode, tUrl, (err: any, data: any) => {
 			let bakData: BackData = {
 				code: Backcode.ok,
 			};
@@ -59,7 +59,7 @@ class DwzView {
 					sql: err.sql,
 				};
 			} else {
-				let host: string = req.headers.host;
+				let host: string = req.headers.host + '';
 				if (host.endsWith(':80')) {
 					host = host.substring(0, host.length - 3);
 				}
@@ -154,7 +154,7 @@ class DwzView {
 				};
 			} else {
 				if (data) {
-					let host: string = req.headers.host;
+					let host: string = req.headers.host + '';
 					if (host.endsWith(':80')) {
 						host = host.substring(0, host.length - 3);
 					}

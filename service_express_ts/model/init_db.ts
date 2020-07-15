@@ -65,7 +65,7 @@ export class InitDb {
 				let result: CreateResult = {
 					total: 0,
 					over: 0,
-					error: null,
+					error: undefined,
 					isErrorBak: false,
 				}
 				// 逐个遍历并创建
@@ -137,7 +137,7 @@ interface CreateResult {
 	 * 存在问题时的问题详情
 	 * @author xwj 2020-07-15
 	 */
-	error: mysql.MysqlError,
+	error: mysql.MysqlError | undefined,
 	/**
 	 * 是否已经将问题回传
 	 * @author xwj 2020-07-15
