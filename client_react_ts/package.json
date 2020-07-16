@@ -18,7 +18,7 @@
     "@types/react-notify-toast": "^0.5.2",
     "@types/react-router-dom": "^5.1.5",
     "antd": "^4.4.2",
-    "axios": "^0.16.2",
+    "axios": "^0.19.2",
     "moment": "^2.27.0",
     "qs": "^6.7.0",
     "react": "^16.13.1",
